@@ -1,0 +1,503 @@
+body{
+	background:#000;
+	font-family:birds;
+}
+
+@font-face{
+	src:url(fonts/birds.ttf);
+	font-family:birds;
+}
+#stage{
+	width:1200px;
+	height:550px;
+	margin:0px auto;
+	position:relative;
+	//border:1px solid #ccc;
+	transform:scale(0.9);
+	overflow:hidden;
+}
+#woods{
+	width:800%;
+	height:100%;
+	background:url("images/woods2.jpg") repeat-x;
+	background-size:1400px 550px;
+	animation:movex 100s alternate linear infinite;
+}
+@keyframes movex{
+	100%{transform:translatex(-80%);}
+}
+#menu{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+#menu > .slider{
+	position:relative;
+	//border:1px solid red;
+	width:50%;
+	height:50%;
+	margin:100px auto;
+	z-index:20;
+}
+#menu > .slider > #left{
+	//border:1px solid red;
+	width:100px;
+	height:80px;
+	position:absolute;
+	top:40%;
+	left:0;
+	background:url("images/left.png") no-repeat;
+	background-size:90%;
+}
+#menu > .slider > #right{
+	//border:1px solid red;
+	width:100px;
+	height:80px;
+	position:absolute;
+	top:40%;
+	right:0;
+	background:url("images/right.png") no-repeat;
+	background-size:90%;
+}
+#menu > .slider > #char{
+	width:70%;
+	height:100%;
+	background:url("gif/player12.gif") no-repeat 50%;
+	background-size:150%;	
+	margin:auto;
+}
+#menu > #nextBtn{
+	//border:1px solid red;
+	width:220px;
+	height:100px;
+	position:absolute;
+	bottom:10%;
+	left:40%;
+	background:url("images/play.png") no-repeat;
+	background-size:contain;
+}
+#menu > #message{
+	//border:1px solid red;
+	width:450px;
+	//height:100px;
+	position:absolute;
+	bottom:20%;
+	left:32%;
+	background-size:contain;
+	text-shadow:0 0 20px #fff; 
+	text-align:center;
+	font-size:40px;
+	color:#fff;
+}
+#menu > #message > span{
+	color:red;
+	font-size:50px;
+}
+
+#menu > .score,.tryNum{
+	//border:1px solid red;
+	width:230px;
+	//height:100px;
+	position:absolute;
+	top:5%;
+	right:5%;
+	text-shadow:0 0 2px #aaa; 
+	text-align:center;
+	font-size:35px;
+	color:#fff;
+}
+#menu > .score > span,#tryNum{
+	color:red;
+	font-size:45px;
+}
+
+.hide{
+	display:none;
+}
+.show{
+	display:block;
+}
+.lock{
+	transform:scale(0.75) translatex(30px);
+}
+.lock::after{
+	content:"";
+	position:absolute;
+	width:100%;
+	height:100%;
+	background:url(images/lock1.png) no-repeat 10% 10%;
+	background-size:70px;
+	border-radius:5%;
+}
+
+.new{
+	transform:scale(0.82) translatex(30px);
+}
+.new::after{
+	content:"";
+	position:absolute;
+	width:100%;
+	height:100%;
+	background:url(images/new3.png) no-repeat 10% 10%;
+	background-size:150px;
+	border-radius:5%;
+}
+
+
+#select{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+#select > .holder{
+	width:60%;
+	margin:150px auto;
+	display:flex;
+	flex-flow:row wrap;
+	justify-content:center;
+}
+#select > .holder > i:hover{
+	transform:scale(1.2);
+}
+#select > .holder > i{
+	transition:0.4s;
+	width:120px;
+	height:120px;
+	background:url("images/lock.png") no-repeat 50%;
+	background-size:contain;
+	cursor:pointer;
+}
+#select > .holder > i.open{
+	background-image:url("images/level1.png");
+}
+#select > .holder > i:nth-child(2){
+	background-image:url("images/level2.png");
+}
+#select > #homeBtn{
+	width:60px;
+	height:60px;
+	background:url("images/home.png") no-repeat 50%;
+	background-size:contain;
+	cursor:pointer;
+	position:absolute;
+	top:30px;
+	left:30px;
+}
+#select > #playerPic{
+	width:150px;
+	height:150px;
+	//background:url("gif/player12.gif") no-repeat 50%;
+	background-size:200%;
+	cursor:pointer;
+	position:absolute;
+	top:30px;
+	right:30px;
+}
+
+
+#levelOne{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+#levelOne > .ground{
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:40%;
+	background:url("images/land1.png") no-repeat 50%;
+	background-size:100%;
+}
+
+#menu > #message{
+	//border:1px solid red;
+	width:450px;
+	//height:100px;
+	position:absolute;
+	bottom:20%;
+	left:32%;
+	background-size:contain;
+	text-shadow:0 0 20px #fff; 
+	text-align:center;
+	font-size:40px;
+	color:#fff;
+}
+#menu > #message > span{
+	color:red;
+	font-size:50px;
+}
+
+#select > #playerPic{
+	width:150px;
+	height:150px;
+	background:url("gif/player12.gif") no-repeat 50%;
+	background-size:200%;
+	cursor:pointer;
+	position:absolute;
+	top:30px;
+	right:30px;
+}
+
+/*  enemy */
+
+
+#enemyBox{
+	//border:1px solid red;
+	width:200px;
+	height:200px;
+	margin:300px 800px;
+	//position:relative;
+}
+
+.wood{
+    width: 15px;
+    height: 60px;
+    background: url(images/choob1.png);
+    position: absolute;
+}
+.ice{
+    width: 30px;
+    height: 30px;
+    background: url(images/ice.png);
+    position: absolute;
+}
+#w1{
+    right: 265px;
+    bottom: 190px;
+    transition: 1s;
+    transform-origin: bottom;
+	transform: rotate(90deg);
+}
+#w2{
+    right: 215px;
+    bottom: 73px;
+    transition: 1s;
+    transform-origin: bottom;
+	background-image:url(images/choob1.png);
+}
+#w3{
+    right: 235px;
+    bottom: 110px;
+    transform: rotate(90deg);
+    transition: 1s;
+
+}
+.ice{
+    width: 32px;
+    height: 30px;
+    background-image: url(./images/ice1.png);
+    position: absolute;
+}
+#i1{
+    bottom: 103px;
+    right: 230px;
+}
+#i2{
+    bottom: 73px;
+    right: 230px;
+}
+#tnt{
+    width: 41px;
+    height: 41px;
+    background-image: url(./images/tnt.png);
+    position: absolute;
+    bottom: 197px;
+    right: 223px;
+	transition:0.5s;
+}
+.sun{
+    width: 130px;
+    height: 130px;
+    background-image: url(./images/sun.png);
+	background-size:contain;
+    position: absolute;
+	top:30px;
+	right:50%;
+	animation:sun 45s infinite linear alternate;
+}
+@keyframes sun{
+	100%{transform: translatex(300%) rotate(2000deg);}
+}
+@keyframes cloud{
+	100%{transform:translatex(-300%);}
+}
+.cloud{
+    width: 270px;
+    height: 270px;
+    background-image: url(./images/clouds.png);
+	background-size:contain;
+    position: absolute;
+	top:8px;
+	right:3%;
+	animation:cloud 20s infinite linear alternate;
+}
+
+
+#boom{
+    width: 200px;
+    height: 200px;
+    background-image: url(./images/boom.gif);
+    background-size: contain;
+    position: absolute;
+    bottom: 120px;
+    mix-blend-mode:screen;
+    right: 140px;
+}
+
+#mouseBox{
+    width: 30px;
+    height: 140px;
+    background-color: rgba(255,255,255,.5);
+    border-radius: 4px;
+    position: absolute;
+    left: 70px;
+    bottom: 180px;
+    display:none;
+	transition:0.3s;
+	//z-index:200;
+}
+
+#player{
+	width: 100px;
+    height: 100px;
+    background:url(gif/player12.gif) no-repeat 50%;
+	background-size:250%;
+	
+	position:absolute;
+	bottom:140px;
+	left:140px;
+	transition:0.2s;
+	cursor:pointer;
+}
+#enemy{
+	width: 41px;
+    height: 41px;
+    background:url(images/pig.png) no-repeat;
+
+	position:absolute;
+	bottom:145px;
+	right:225px;
+}
+
+
+/*  fly animations  */
+
+#player.fly1{
+	animation:move1 2s ease-in-out forwards;	
+}
+#player.fly2{
+	animation:move2 1s ease-in-out forwards;	
+	z-index:200;
+}
+#player.fly3{
+	animation:move3 1.2s ease-in-out forwards;	
+}
+
+@keyframes move1{
+	0%{
+		transform:translate(0px,0px);
+	}
+	100%{
+		transform:translate(1200px,-250px);
+	}
+}
+@keyframes move2{
+	0%{
+		transform:translate(0px,0px);
+	}
+	100%{
+		transform:translate(740px,110px);
+	}
+}
+
+
+@keyframes move3{
+    0%{ 
+		transform:translate(0,0);
+   }
+    83%{
+		transform:translate(780px,-30px);
+    }
+    100%{
+		transform:translate(760px,130px);
+    }
+}
+
+/*   destroy 1   */
+
+
+.destroy1 #i1{	transform:rotate(20deg);}
+.destroy1 #w1{	transform:translate(60px,100px) rotate(100deg);}
+.destroy1 #w3{	transform:rotate(80deg);}
+.destroy1 #tnt{	transform:translate(100px,140px) rotate(640deg);}
+
+
+/*   destroy 2   */
+
+.destroy2 #i1{	opacity:0;}
+.destroy2 #i2{	opacity:0;}
+.destroy2 #w1{	transform:translate(60px,100px) rotate(-90deg);transition-delay:0s}
+.destroy2 #w2{	transform:rotate(85deg);transition-delay:0s}
+.destroy2 #w3{	transform:translate(5px,50px) rotate(80deg) ;transition-delay:0s}
+.destroy2 #tnt{	display:none;}
+.destroy2 #enemy{ animation: pigOut 2.5s ease-in-out forwards;}
+
+@keyframes pigOut{
+    0%{
+		transform:translate(0,0);
+    }
+    50%{
+		transform:translate(50px,-500px) rotate(700deg);
+    }
+    100%{
+		transform:translate(60px,90px) rotate(1400deg);	
+    }	
+}
+
+#result{
+	background:url(images/winbg.jpg) 50%;
+	background-size:120%;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:200;
+}
+#result > div{
+	background:url(images/winMenu.png) 50% no-repeat;
+	background-size:100%;
+	width:40%;
+	height:80%;
+	margin:70px auto;
+}
+
+
+#levelTwo{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+#levelTwo > .ground{
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:url("images/land2.png") no-repeat 50%;
+	background-size:100%;
+}
+
+
+
+
+

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+<audio src="audio/menu.mp3" id="auStart"></audio>
+<audio src="audio/level.mp3" id="auLevel"></audio>
+<audio src="audio/player.mp3" id="auPlayerSel"></audio>
+<audio src="audio/fly.wav" id="auFly"></audio>
+<audio src="audio/sling.wav" id="auSling"></audio>
+<audio src="audio/pigs.mp3" id="auPigs"></audio>
+<audio src="audio/marsh.mp3" id="auMarsh"></audio>
+<audio src="audio/bye3.m4a" id="auBye"></audio>
+<audio src="audio/tnt.wav" id="auTnt"></audio>
+<audio src="audio/rock.wav" id="auRock"></audio>
+<audio src="audio/ice.wav" id="auIce"></audio>
+<audio src="audio/win.mp3" id="auWin"></audio>
+
+<div id="stage">
+	<div id="woods"> </div>
+	<div id="menu" class="show">
+		<div class="slider">
+			<div id="char"></div>
+			<div id="right"></div>
+			<div id="left"></div>	
+		</div>
+		<div id="nextBtn"></div>
+		<div class="cloud"> </div>	
+		<div id="message" class="hide"> <span id="messPoint">3 points</span> to unlock</div>			
+	</div>
+
+	<div id="select" class="hide">
+		<div class="holder">
+			<i class="open" onclick="loadLevel(1)"></i>
+			<i onclick="loadLevel(2)"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+		</div>
+
+		<div id="playerPic"></div>
+		<div id="homeBtn"></div>
+	</div>
+	
+	<div id="levelOne" class="hide">
+		<div class="ground"> </div>
+		<div id="player"> </div>	
+		<div id="enemyBox">
+			<div id="enemy"></div>
+			<div id="w1" class="wood"></div>
+			<div id="w2" class="wood"></div>
+			<div id="w3" class="wood"></div>
+			<div id="i1" class="ice"></div>
+			<div id="i2" class="ice"></div>
+			<div id="tnt"></div>
+			<div id="mouseBox"></div>
+			<div id="boom"></div>
+			<div id="bomb"></div>
+		</div>		
+		<div id="mouseBox"></div>
+		<div class="cloud"> </div>	
+	
+	</div>
+	
+	<div id="levelTwo" class="hide">
+		<div class="ground"> </div>
+	</div>
+	
+	<div id="result" class="hide">
+		<div> </div>
+	</div>
+	
+</div>
+
+<script>
+	
+const chars = [{pic:"player12.gif",voice:"zoo1.mp3",speed:3.5,lock:0,unlockScore:9},
+				{pic:"player3.gif",voice:"zoo6.mp3",speed:2.5,lock:1,unlockScore:1},
+				{pic:"player4.gif",voice:"zoo2.mp3",speed:2.5,lock:1,unlockScore:5},
+				{pic:"player6.gif",voice:"zoo3.mp3",speed:1.5,lock:0,unlockScore:0},
+				{pic:"player8.gif",voice:"zoo4.mp3",speed:2,lock:1,unlockScore:8},
+				{pic:"player9.gif",voice:"zoo5.mp3",speed:2,lock:0,unlockScore:0},
+				{pic:"player10.gif",voice:"zoo6.mp3",speed:1,lock:1,unlockScore:2},
+				{pic:"player11.gif",voice:"zoo5.mp3",speed:2,lock:0,unlockScore:0}
+			  ];
+	
+
+/*`character slider	*/
+
+var cp = 0;
+var charLen = chars.length;
+
+function lockPlayer(x){
+	let isLock = chars[x].lock;
+
+	if(isLock == 1){
+		char.className = "lock";
+		nextBtn.className = "hide";
+		message.className = "";
+		messPoint.innerHTML = chars[x].unlockScore + "points";
+	}
+	else if(isLock == 0){
+		char.className = "";
+		nextBtn.className = "";
+		message.className = "hide";
+	}
+
+}
+
+right.onclick = function(){
+
+	cp = (cp + 1)%charLen;
+
+	char.style.backgroundImage = "url(gif/" + chars[cp].pic + ")";
+
+	/* lock player */
+
+	lockPlayer(cp);
+
+}
+
+left.onclick = function(){
+	cp = (cp - 1)%charLen;
+
+	if(cp < 0){
+		cp = cp + charLen;
+	}
+
+	char.style.backgroundImage = "url(gif/" + chars[cp].pic + ")";
+
+	lockPlayer(cp);
+
+}
+
+nextBtn.onclick = function(){
+	menu.className = "hide";
+	select.className = "show";
+
+	/* change player */
+	player.style.backgroundImage = "url(gif/" + chars[cp].pic + ")";
+	playerPic.style.backgroundImage = "url(gif/" + chars[cp].pic + ")";
+}
+
+homeBtn.onclick = function(){
+	menu.className = "show";
+	select.className = "hide";
+}
+
+function loadLevel(x){
+	select.className = "hide";
+	auStart.pause();
+	auMarsh.play();
+	auLevel.play();
+	
+	if(x == 1){
+		levelOne.className ="show";
+	}
+	else if(x == 2){		
+		levelTwo.className ="show";				
+	}
+}
+
+/*  engine  */
+
+auStart.play();
+
+player.onclick = function(){
+	this.style.bottom = "170px";
+	this.style.left = "200px";	
+	
+	let playerVoice = new Audio("audio/" + chars[cp].voice);
+	playerVoice.play();
+	
+	mouseBox.style.display = "block";
+}
+
+char.onclick = function(){
+	let playerVoice = new Audio("audio/" + chars[cp].voice);
+	playerVoice.play();
+}
+
+mouseBox.onmousemove = function(e){
+	auSling.play();
+	player.style.left = "120px";
+	player.style.bottom = e.pageY/2 + "px";	
+	
+	mouseBox.innerHTML = e.pageY;
+	
+	mouseBox.onclick = function(){
+		auFly.play();
+		
+		if(e.pageY < 280){
+			player.className = "fly1";
+		}
+		else if(e.pageY > 340){
+			player.className = "fly2";
+			
+			function destroyOne(){
+				enemyBox.className = "destroy1";
+				auIce.play();
+			}
+			
+			setTimeout(destroyOne,900);
+		}	
+		else{
+			player.className = "fly3";
+			
+			function destroyOne(){			
+				enemyBox.className = "destroy2";
+				auTnt.play();		
+				auIce.play();	
+				auBye.play();
+			}	
+
+			setTimeout(destroyOne,1000);			
+		}		
+	}
+}
+
+
+</script>
+
+
+</body>
+</html>
